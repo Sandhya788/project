@@ -1,0 +1,47 @@
+{% extends 'app/base.html' %}
+{% block title %}Give Permissions{% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card col-md-8 mx-auto shadow-lg">
+		<div class="card-body">
+			<h3>Granting Permissions</h3>
+			<table class="table table-borderless table-hover">
+				<tr class="bg-dark text-light">
+					<th>Sno</th>
+					<th>Username</th>
+					<th>Role Requested</th>
+					<th>Role Granted</th>
+					<th>Actions</th>
+				</tr>
+				{% for v in h %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{v.0}}</td>
+					<td>
+						{% if v.1 == 2 %}
+						<span class="badge badge-success">Manager</span>
+						{% elif v.1 == 3 %}
+						<span class="badge badge-info">User</span>
+						{% endif %}
+					</td>
+					<td>
+						{% if v.2 == 1 %}
+						<span class="badge badge-danger">Guest</span>
+						{% elif v.2 == 2 %}
+						<span class="badge badge-success">Manager</span>
+						{% else %}
+						<span class="badge badge-warning">User</span>
+						{% endif %}
+					
+					</td>
+					<td>
+						<a href="{% url 'gvup' v.3 %}" class="btn btn-outline-primary mx-2">Update</a>
+						<a href="#" class="btn btn-outline-success mx-2">Delete</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'app/base.html' %}
+{% block title %}Furiniture List{% endblock %}
+{% block content %}
+<div class="container mt-4">
+{% if messages %}
+{% for m in messages %}
+<div class="alert alert-{{m.tags}} alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{m}}
+</div>
+{% endfor %}
+{% endif %}
+	<div class="row">
+		<div class=" card col-md-4 shadow-lg mx-2 h-100">
+			<div class="card-body">
+				<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<h3 class="text-center text-light bg-secondary p-2 border-rounded">Add Furniture</h3>
+				{% for j in q %}
+						{{j}}
+				{% endfor %}
+				<div class="row">
+					<div class="col">
+						<input type="reset" name="Reset" class="btn btn-outline-info my-2 form-control">
+					</div>
+					<div class="col">
+						<input type="submit" value="Create" class="btn btn-outline-success my-2 form-control">
+					</div>
+				</div>
+			</form>
+			</div>
+		</div>
+		<div class="card col-md shadow-lg mx-2">
+			<div class="card-body">
+				<h3 class="text-light p-2 border-rounded bg-danger">List of Furnitures</h3>
+				<table class="table table-borderless table-hover ">
+					<tr class="bg-dark text-light">
+						<th>S.No</th>
+						<th>Furnitureshop Name</th>
+						<th>N items</th>
+						<th>Timings</th>
+						<th>Operations</th>
+					</tr>
+					{% for k in a %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td><a href="{% url 'rsvw' k.id %}">{{k.rname}}</a></td>
+						<td>{{k.nitems}}</td>
+						<td>{{k.timings}}</td>
+						<td><a href="{% url 'rsup' k.id %}" class="btn btn-outline-warning my-1">Update</a><a href="{% url 'rsdl' k.id %}" class="btn btn-outline-danger mx-1">Delete</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

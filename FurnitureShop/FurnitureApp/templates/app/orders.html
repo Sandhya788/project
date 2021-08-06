@@ -1,0 +1,62 @@
+{% extends 'app/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container-fluid mx-auto mt-4">
+  <div class="row mx-auto">
+    <!-- filter -->
+    <div class="col-lg-3">
+      <div class="list-group">
+        <a href="/" class="list-group-item list-group-item-action">All Products</a>
+        {% for j in a %}
+        <a href="/?category={{j.id}}" class="list-group-item list-group-item-action">{{j.rname}}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- all products -->
+    <div id="i" class="col-lg-9">
+      <div class="row">
+    {% for x in i %}
+    <div class="col col-md-3">
+      <div class="card shadow-lg mx-auto mb-3">
+        <img src="{{x.imimg.url}}" class="card-img-top" height="120px">
+        <div class="card-body">
+          <tr>
+            <td><span class="badge badge-info" style="font-size:12px">{{x.iname}}</span>
+            <span style="font-size: 12px;float:right">{{x.icategory}}</span></td>
+          </tr>
+          <div class="row">
+            <div class="col">
+              <h6>price: {{x.iprice}}</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6>Timings: {{x.itavailability}}</h6>
+            </div>
+          </div>
+          <!-- <div class="row"> -->
+            <form method="post" action="/">
+              {% csrf_token %}
+              <input hidden type="text" name="x" value="{{x.id}}" class="mx-auto">
+              <!-- <div class="col"> -->
+                <div class="row">
+                  <div class="col">
+                    <a href="#" class="btn btn-outline-primary form-control my-2">Order</a>
+                  </div>
+                  <div class="col">
+                    <a href="#"><input type="button" value="Add To Cart" class=" float-right btn btn-light border btn-sm my-2"></a>
+                  </div>
+                </div>
+              
+            <!-- </div> -->
+            </form>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

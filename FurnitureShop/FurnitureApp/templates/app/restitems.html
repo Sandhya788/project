@@ -1,0 +1,82 @@
+{% extends 'app/base.html' %}
+{% block title %}Item List{% endblock %}
+{% block content %}
+<div class="container-fluid mt-4">
+{% if messages %}
+{% for m in messages %}
+<div class="alert alert-{{m.tags}} alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{m}}
+</div>
+{% endfor %}
+{% endif %}
+	<div class="row">
+		<div class="card col-md-4 shadow-lg mx-2 h-100">
+			<div class="card-body">
+				<form method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<h3 class="text-center text-light bg-secondary p-2 border-rounded">Add Furniture Items</h3>
+					{% for j in q %}
+					{% if forloop.counter == 1 %}
+					<select class="form-control my-2" name="rsid">
+						{% for b in a %}
+						<option value="{{b.id}}">{{b}}</option>
+						{% endfor %}
+					</select>
+					{% elif forloop.counter >= 2 %}
+					<div>{{j}}</div>
+					{% endif %}
+				{% endfor %}
+				<div class="row">
+						<div class="col">
+							<input type="reset" value="Reset" class="btn btn-outline-info my-2 form-control">
+						</div>
+						<div class="col">
+							<input type="submit" value="ADD" class="btn btn-outline-warning my-2 form-control">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="card col-md shadow-lg mx-auto">
+			<div class="card-body">
+				<h3 class="text-light bg-warning p-2 border-rounded">List of Furniture Items</h3>
+				<table class="table table-borderless table-hover">
+					<tr class="bg-dark text-light">
+						<th>SNo</th>
+						<th>Furniture</th>
+						<th>ItemName</th>
+						<th>ICategory</th>
+						<th>Price</th>
+						<th>ItemAvail</th>
+						<th>Actions</th>
+					</tr>
+					{% for t in m %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{t.6}}</td>
+						<td><a href="{% url 'imvw' t.5 %}">{{t.0}}</a></td>
+						<td>
+							{% if t.1 == 'VG' %}
+							<span class="badge badge-success">chairs and sofas</span>
+							{% else %}
+							<span class="badge badge-danger">beds and tables</span>
+							{% endif %}
+						</td>
+						<td>{{t.2}}</td>
+						<td>
+							{% if t.4 == 'AV' %}
+							<span class="badge badge-success">Availabile</span>
+							{% else %}
+							<span class="badge badge-danger">Not Available</span>
+							{% endif %}
+						</td>
+						<td><a href="{% url 'imup' t.5 %}" class="btn btn-outline-success mx-1">Update</a><a href="{% url 'imdl' t.5 %}" class="btn btn-outline-danger mx-1">Delete</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

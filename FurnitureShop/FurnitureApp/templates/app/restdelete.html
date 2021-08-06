@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+{% block title %}Dlelete Resyaurant{% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card col-md-6 mx-auto shadow-lg">
+		<div class="card-body">
+			<h3><i>Deleting Restaurant</i></h3>
+				<h4 class="alert alert-success"> Are You Sure Want To Delete: <span style="color:deeppink;">{{i.rname}}</span> ?</h4>
+				<div class="row">
+					<div class="col">
+						<form method="post">
+							{% csrf_token %}
+							<input type="submit" value="Yes Confirm" class="btn btn-outline-primary form-control my-2 col-sm">
+						</div>
+						<div class="col">
+							<a href="{% url 'rstl' %}" class="btn btn-outline-danger form-control my-2 col-sm">Cancel</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock%}

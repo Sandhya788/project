@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+{% block title %}change Password{% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card col-md-6 mx-auto shadow-lg">
+		<div class="card-body">
+			<h3>Change Password</h3>
+			<form method="post">
+				{% csrf_token %}
+				<!-- {{t.as_p}} -->
+				{% for j in t %}
+				<div>{{j}}</div>
+				{% endfor %}
+				<div class="row">
+					<div class="col">
+						<a href="{% url 'hm' %}" class="btn btn-outline-secondary form-control my-2">Back</a>
+					</div>
+					<div class="col">
+						<input type="reset" value="Reset" class="btn btn-outline-info my-2 form-control">
+					</div>
+					<div class="col">
+						<input type="submit" value="ChangePwd" class="btn btn-outline-success my-2 form-control">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

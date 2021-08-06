@@ -1,0 +1,94 @@
+{% extends 'app/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% load static %}
+<div class="container-fluid">
+  {% if user.role == 2 %}
+  <div class="row mx-3 mt-3">
+    <div class="col-md-7">
+      <h3>Carousel</h3>
+    </div>
+    <div class="col-md mx-2">
+      <h3>Items List</h3>
+    </div>
+  </div>
+
+  <div class="row mx-2">
+    {% for x in c %}
+    <div class="col col-md-3">
+      <div class="card shadow-lg my-2">
+        <img src="{{x.rsimg.url}}" class="card-img-top" height="120px">
+        <div class="card-body">
+          <tr>
+            <td><span class="badge badge-info" style="font-size:25px">{{x.rname}}</span>
+            <span style="font-size: 20px;float:right">{{x.address}}</span></td>
+          </tr>
+          <div class="row">
+            <div class="col">
+              <h6>Items: {{x.nitems}}</h6>
+            </div>
+            <div class="col">
+              <h6>Timings: {{x.timings}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% elif user.is_superuser %}
+  <div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+    <h3>You are Admin</h3>
+  </div>
+  {% elif user.role == 3 %}
+  <div class="row mx-3 mt-3">
+    <div class="col-md-7">
+      <h3>Carousel</h3>
+    </div>
+    <div class="col-md mx-2">
+      <h3>Items List</h3>
+    </div>
+  </div>
+
+  <div class="row mx-2">
+    {% for x in y %}
+    <div class="col col-md-3">
+      <div class="card shadow-lg my-2">
+        <img src="{{x.rsimg.url}}" class="card-img-top" height="120px">
+        <div class="card-body">
+          <tr>
+            <td><span class="badge badge-info" style="font-size:25px">{{x.rname}}</span>
+            <span style="font-size: 20px;float:right">{{x.address}}</span></td>
+          </tr>
+          <div class="row">
+            <div class="col">
+              <h6>Items: {{x.nitems}}</h6>
+            </div>
+            <div class="col">
+              <h6>Timings: {{x.timings}}</h6>
+            </div>
+          </div>
+          <div class="row">
+            <a href="{% url 'fo' %}" class="btn btn-outline-primary form-control my-2">check items</a>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% elif user.role == 1 %}
+<div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+  <h3>You are in Guest Account</h3>
+</div>
+<div class="container">
+    <img src="{% static 'images/shop2.jfif' %}" alt="Los Angeles" style="width:1000px;">
+</div>     
+
+  {% else %}
+  <div class="container-fluid">
+    <img src="{% static 'images/shop3.jfif' %}" alt="Los Angeles" style="width:1450px; height:600px;">
+  </div>     
+  {% endif %}
+</div>
+{% endblock %}

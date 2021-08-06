@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="row">
+		<div class="card col-md-4 mx-2 shadow-lg h-100">
+			<div class="card-body">
+				<h3>Profile</h3>
+				<img src="{{user.uimg.url}}" width="100%" class="img-thumbnail">
+			</div>
+		</div>
+		<div class="card col-md mx-2 shadow-lg h-100">
+			<div class="card-body">
+				<h3>User Details</h3>
+				<table class="table table-borderless">
+					<tr>
+						<th>First Name</th>
+						<td>{{user.first_name}}</td>
+						<th>Last Name</th>
+						<td>{{user.last_name}}</td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td>{{user.email}}</td>
+						<th>Age</th>
+						<td>{{user.age}}</td>
+					</tr>
+				</table>
+				<!-- <form method="post">
+					{% csrf_token %} -->
+					<div class="row">
+						<div class="col">
+							<a href="{% url 'hm' %}" class="btn btn-outline-danger form-control my-2">Back</a>
+						</div>
+						<div class="col">
+							<a href="{% url 'pfup' %}" class="btn btn-outline-info my-2 form-control">Update</a>
+						</div>
+					</div>
+				<!-- </form> -->
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

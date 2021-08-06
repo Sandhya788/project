@@ -1,0 +1,99 @@
+{% load static %}
+<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand text-warning" href="{% url 'hm' %}">
+    <img src="{% static 'images/shop2.jfif' %}" style="width:60px;">
+    Furniture
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      {% if not user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'hm' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'ab' %}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'ct' %}">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'reg' %}">Registration</a>
+      </li>
+      {% elif user.role == 2 %}
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'hm' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'rstl' %}">Furniture List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'ritms' %}">Furniture Items</a>
+      </li>
+      {% elif user.is_superuser %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'gvpm' %}">Permissions</a>
+    </li>
+    {% elif user.role == 3 %}
+    
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Order</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'fd' %}">Feedback</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Cart</a>
+    </li>
+    
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'rlrq' %}">Role Request</a>
+    </li>
+      {% endif %}
+    </ul>
+    <ul class="navbar-nav ml-auto" style="margin-right: 120px;">
+      {% if not user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'lg' %}">Login</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'lg1' %}">Logout</a>
+      </li> 
+      <div class="dropdown">
+        <li class="nav-link dropdown-toggle" data-toggle="dropdown"><!-- Hi Welcome {% if user.role == 3 %}
+          <span>User</span>
+          {% elif user.role == 2 %}
+          <span>Manager</span>
+          {% else %}
+          <span>Guest</span>
+          {% endif %} -->
+          <img src="{{user.uimg.url}}" class="rounded-circle" height="25px" width="25px">
+          {{request.user.username}}
+        </li>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'pf' %}">Profile</a>
+          <a class="dropdown-item" href="{% url 'chpd' %}">Change Password</a>
+          <a class="dropdown-item" href="{% url 'lg1' %}">Logout</a>
+        </div>
+      </div>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

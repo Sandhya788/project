@@ -1,0 +1,48 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}View Restaurant{% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card col-md-8 mx-auto shadow-lg">
+		<div class="card-body">
+			<h3>Restaurant View</h3>
+			<div class="row">
+				<div class="col-sm">
+					<img src="{{z.rsimg.url}}" height="180px" width="100%">
+				</div>
+				<div class="col">
+					<table class="table table-borderless">
+						<tr>
+							<th>Item Name</th>
+							<td>{{d.iname}}</td>
+						</tr>
+						<tr>
+							<th>Items Category</th>
+							<td>{% if d.icategory == "VG" %}
+								<span>Vegeterian</span>
+								{% else %}
+								<span>Non-Vegeterian</span>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<th>Price</th>
+							<td>{{d.price}}</td>
+						</tr>
+						<tr>
+							<th>Availability</th>
+							<td>{% if d.itavailability == "AV" %}
+								<span>Available</span>
+								{% else %}
+								<span>Not Available</span>
+								{% endif %}
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+				<a href="{% url 'rstl' %}" class="btn btn-block btn-outline-warning my-2">Back To list</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

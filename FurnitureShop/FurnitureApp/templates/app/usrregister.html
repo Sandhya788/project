@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+{% block title %}User registration{% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card col-md-6 mx-auto shadow-lg">
+		<div class="card-body">
+			<h3>User Registration</h3>
+			<!--{{t.as_p}}-->
+			<form method="post">
+				{% csrf_token %}
+				{% for i in t %}
+				<div>{{i}}</div>
+				{% endfor %}
+				 
+
+  <div class="form-group">
+  	<label for="email">Email:</label>
+  	<input type="text" class="form-control" id="email" name="mail" placeholder="enter your email address" required="required">
+  </div>
+    <label for="phone">Phn no:</label>
+    <input type="tel" id="phone" name="phone" class="form-control" pattern="[+]{1}[0-9]{11,14}" placeholder="enter your mobile number" required><br>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" placeholder="enter your Address" class="form-control" rows="4" cols="50">
+    </textarea><br>
+
+				<div class="row">
+					<div class="col">
+						<input type="reset" value="Reset" class="btn btn-outline-info my-2 form-control">
+					</div>
+					<div class="col">
+						<input type="submit" value="Create User" class="btn btn-outline-danger form-control my-2">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock%}
